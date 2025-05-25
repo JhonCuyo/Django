@@ -14,3 +14,14 @@ class Curso(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class NotaAlumnoCurso(models.Model):
+    alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    nota = models.FloatField()
+
+    class Meta:
+        unique_together = ('alumno', 'curso')
+
+    def __str__(self):
+        return f'{self.alumno} - {self.curso}: {self.nota}'
